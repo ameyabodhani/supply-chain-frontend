@@ -1,0 +1,119 @@
+/* Vsignin.css */
+/* Simple, readable styling for learning React */
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f8f8f8;
+}
+
+/* Page Container */
+.page-container {
+  text-align: center;
+}
+
+/* Header */
+.header {
+  background-color: #007bff;
+  color: white;
+  padding: 15px 0;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #eaeaea;
+  padding: 10px 0;
+}
+
+.navbar a {
+  margin: 0 15px;
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.navbar a:hover {
+  color: #007bff;
+}
+
+/* Login Form Container */
+.form-container {
+  background-color: white;
+  width: 320px;
+  margin: 60px auto;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.form-container h2 {
+  text-align: center;
+  color: #333;
+}
+
+.subtitle {
+  text-align: center;
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Button */
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Error Message */
+.error {
+  background-color: #ffdddd;
+  color: #a00;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+/* Footer Text */
+.footer-text {
+  text-align: center;
+  font-size: 14px;
+}
+
+.footer-text a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.footer-text a:hover {
+  text-decoration: underline;
+}

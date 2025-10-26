@@ -1,0 +1,36 @@
+.firstDiv{
+    height: 80px;
+    /* border: 1px solid black; */
+    margin-top: 22px;
+    display: flex;
+    align-items: center;
+}
+
+.innerDiv1{
+    height: 60px;
+    width: 200px;
+    /* border: 1px solid black; */
+    margin-left: 80px;
+    background-color: #00ace6;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px black;
+}
+.innerDiv2{
+    height: 60px;
+    width: 600px;
+    /* border: 1px solid black; */
+    margin-left: 0px;
+    background-color: #00ace6;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px black;
+}
+#name{
+    font-size: 28px;
+    color: white;
+    letter-spacing: 5px;
+    font-family: cursive;
+    margin: 0px;
+    padding: 0px;
+    line-height: 60px;
+    text-align: center;
+}

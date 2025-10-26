@@ -1,0 +1,93 @@
+#header{
+    margin-left: 30px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#company-name{
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 0px;
+
+}
+.invoice-details{
+    font-size: 15px;
+    font-weight: 600;
+    margin-right: 30px;
+    
+}
+.invoice-table{
+    margin-left: 30px;
+    width: 92%;
+    margin-top: 20px;
+}
+#header2{
+    margin-right: 30px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row-reverse;
+}
+#to{
+    margin-bottom: 0px;
+}
+#clientName{
+    margin-bottom: 0;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 0px;
+}
+
+#address-client{
+    margin-top: 0;
+}
+
+.total p{
+    margin-top: 100px;
+    margin-left: 550px;
+    font-size: 20px;
+    font-weight: 1000;
+   
+}
+.paid {
+    position: absolute;
+  left: 10px;
+  top: 10px;
+  font-size: 200px;
+  z-index: -1000;
+  opacity: 0.2;
+  margin-left: 150px;
+  margin-top: 350px;
+ color: red;
+  transform: rotate(-30deg);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+}
+.footer{
+   margin: auto;
+  width: 420px;
+    margin-top: 100px;
+   
+  
+}
+#invoice-msg{
+    margin-left: 16px;
+   
+    margin-bottom: 0px;
+   
+}
+#invoice-contact{
+    margin-top: 0px;
+    font-weight: 1000;
+    margin-left: 10px;
+    margin-top: 0px;
+  
+}
+#greetings{
+font-family: cursive;
+font-size: 30px;
+font-weight: 1000;
+margin: auto;
+
+width: 445px;
+}

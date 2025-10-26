@@ -1,0 +1,62 @@
+/* Home.css */
+
+/* Basic styling for the page */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100vh; /* Full screen height */
+  text-align: center;
+  background-color: #f4f4f4; /* light gray background */
+  font-family: Arial, sans-serif;
+  color: #333;
+  margin: 0;
+}
+
+/* Header section */
+.home-header {
+  margin-top: 60px;
+}
+
+.home-header h1 {
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.home-header p {
+  font-size: 16px;
+  color: #555;
+}
+
+/* Button section */
+.button-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* space between buttons */
+  margin-top: 40px;
+}
+
+/* Button styling */
+.home-button {
+  background-color: #007bff; /* blue button */
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none; /* remove underline */
+  border-radius: 4px;
+  width: 200px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+/* Change color on hover */
+.home-button:hover {
+  background-color: #0056b3;
+}
+
+/* Footer section */
+.home-footer {
+  margin-bottom: 30px;
+  font-size: 14px;
+  color: #777;
+}

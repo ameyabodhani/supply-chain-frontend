@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
+
+*{
+    font-family: 'Roboto', sans-serif;
+}
+.page-container{
+    
+    height: 527px;
+    /* background-color: antiquewhite; */
+    
+    /*box-shadow: 0px 0px 20px gray;*/
+}
+.page-header{
+    height: 50px;
+    /* background-color: violet; */
+    
+}
+
+.page-header h4{
+    margin-left: 10px;
+    font-size: 18px;
+    
+    line-height: 50px;
+}
+
+.page-updateStatus{
+    margin-top: 10px;
+    margin-left: 10px;
+    height: 35px;
+    /* border: 1px solid black; */
+}
+#page-table .id{
+  
+  width: 140px;
+}
+
+.page-table-div{
+    height: 360px;
+    /* border: 1px solid black; */
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+   
+}
+
+.page-button-div{
+    margin-top: 10px;
+    margin-left: 10px;
+    transition: 0.5s ease-in-out;
+}
+
+
+.btn-page-edit{
+    margin-right: 5px;
+    height: 30px;
+    padding-top: 2px;
+}
+.btn-page-delete{
+    height: 30px;
+    padding-top: 2px;
+}
+
+#page-table thead{
+    background-color:#E5E8E8;
+    height: 30px;
+    line-height: 30px;
+}
+
+
+.productionHistory-btn{
+    margin-left: 20px;
+    color: white;
+}
+
+
+#page-table tbody .status .Active{
+  background-color: #00e600;
+  width: 50px;
+  text-align: center;
+  color: white;
+  border-radius: 5px;
+  margin: 0px;
+  font-size: 13px;
+  margin-top: 3px;    
+}
+#page-table tbody .status .done{
+  background-color: #00e600;
+  width: 50px;
+  text-align: center;
+  color: white;
+  border-radius: 5px;
+  margin: 0px;
+  font-size: 13px;
+  margin-top: 3px;    
+}
+
+
+#page-table tbody .status .Inactive{
+  background-color: #ff9900;
+  width: 50px;
+  text-align: center;
+  color: white;
+  border-radius: 5px;
+  margin: 0px;
+  font-size: 13px;
+ margin-top: 3px; 
+}
+#page-table tbody .status .pending{
+  background-color: #ff9900;
+  width: 55px;
+  text-align: center;
+  color: white;
+  border-radius: 5px;
+  margin: 0px;
+  font-size: 13px;
+ margin-top: 3px; 
+}
+
+.page-updateStatus #crud-status-added{
+  
+  padding: 3px 0px 3px 5px;
+  background-color: #00e600;
+  color: white;
+  text-align: center;
+  border-radius: 8px;
+  margin-right: 5px;
+}
+.page-updateStatus #crud-status-edited{
+  padding: 3px 0px 3px 5px;
+  background-color: orange;
+  color: white;
+  text-align: center;
+  border-radius: 8px;
+  margin-right: 5px;
+  transition-delay: 1s;
+}
+.page-updateStatus #crud-status-hide{
+  opacity: 0;
+}
+.page-updateStatus #crud-status-deleted{
+  padding: 3px 0px 3px 5px;
+  background-color: red;
+  color: white;
+  text-align: center;
+  border-radius: 8px;
+  margin-right: 5px;
+}
+
+/*********Pagination******/
+  .paginationBttns {
+    width: 100%px;
+    height: 20px;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 30px;
+   
+  }
+  
+  .paginationBttns a {
+    padding: 10px;
+    margin: 8px;
+    border-radius: 5px;
+   /* border: 1px solid #2b2eff;*/
+    color: black;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: gainsboro;
+  }
+  
+  .paginationBttns a:hover {
+    color: white;
+    background-color: #2b2eff;
+  }
+
+
+  
+  .paginationActive a {
+    color: white;
+    background-color: #2b2eff;
+  }
+  /*
+  .paginationDisabled a {
+    color: grey;
+    background-color: grey;
+  }*/

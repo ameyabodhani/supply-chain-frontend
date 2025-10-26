@@ -1,0 +1,60 @@
+/* ==== General Reset ==== */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+}
+
+/* ==== Header Section ==== */
+.app-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #003366;
+  color: white;
+  padding: 10px 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.header-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+/* ==== Navigation Bar ==== */
+.app-nav {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.nav-link, .nav-button {
+  color: white;
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 6px 10px;
+  transition: background-color 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.nav-user {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.nav-button {
+  border: 1px solid white;
+  border-radius: 4px;
+  padding: 5px 12px;
+}
