@@ -2,10 +2,12 @@ import axios from'axios'
 import { useState, useEffect } from 'react';
 import { Link ,useHistory } from 'react-router-dom';
 import { url } from "../../common/constants"
+import './AddClients.css'
 
 
 
 const AddClients = () =>{
+    console.log('AddClients component (from Client/AddClients.js) is rendering')
     const [clientName,setClientName] = useState('')
     const[clientAddress,setClientAddress] = useState('')
     const[clientPhone,setClientPhone] = useState('')
@@ -96,20 +98,25 @@ return (
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="AddClient">Add Client</h5>
+        <h5 class="modal-title" id="AddClientTitle">Add Client</h5>
         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
       <form>
-  <div class="form-row">
-    <div class="form-group col-md-6">
+  <div class="form-group">
       <label for="name">Name</label>
-      <input type="text" class="form-control" id="name" placeholder="Name"
-      onChange={(e)=>setClientName(e.target.value)} required />
-    </div>
-  
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        placeholder="Name"
+        onChange={(e)=>setClientName(e.target.value)}
+        value={clientName}
+        autoComplete="off"
+        style={{color: '#495057', fontFamily: 'Roboto, sans-serif', backgroundColor: '#fff'}}
+        required />
   </div>
   <div class="form-group">
     <label for="inputAddress">Address</label>

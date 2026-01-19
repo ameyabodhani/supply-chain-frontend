@@ -1,199 +1,203 @@
-import axios from'axios'
-import { useState, useEffect } from 'react';
-import { Link ,useHistory } from 'react-router-dom';
-import { url } from '../../common/constants';
+import axios from 'axios'
+import { useState } from 'react'
+import { url } from '../../common/constants'
+import './AddSuppliers.css'
 
+const AddSuppliers = ({ refresh, setMessage }) => {
+  const [sName, setSName] = useState('')
+  const [sAddress, setSAddress] = useState('')
+  const [sPhone, setSPhone] = useState('')
+  const [sEmail, setSEmail] = useState('')
+  const [error, setError] = useState('')
 
-const AddSuppliers = ({toggle, refresh,setMessage,setMessageId}) =>{
-    const [sName,setSName] = useState('')
-    const[sAddress,setSAddress] = useState('')
-    const[sPhone,setSPhone] = useState('')
-    const[sEmail,setSEmail] = useState('')
+  const validateForm = () => {
+    setError('')
 
-const  history = useHistory()
+    if (!sName.trim()) {
+      setError('Supplier name is required')
+      return false
+    }
+    if (!sAddress.trim()) {
+      setError('Address is required')
+      return false
+    }
+    if (!sPhone.trim()) {
+      setError('Phone number is required')
+      return false
+    }
+    if (!/^\d{10}$/.test(sPhone)) {
+      setError('Phone number must be 10 digits')
+      return false
+    }
+    if (!sEmail.trim()) {
+      setError('Email is required')
+      return false
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(sEmail)) {
+      setError('Please enter a valid email')
+      return false
+    }
+    return true
+  }
 
-const addSuppliersToDB = () => {
-    if(sName.length === 0){
-    alert('Enter name ')
-}else
- if(sAddress.length === 0){
-     alert('Enter address')
- }
- else if(sPhone.length === 0){
-     alert('Enter phone no')
- }
- else if (sEmail.length === 0){
-     alert('Enter email')
- } else {
-     const data= new FormData()
-     data.append('sName',sName)
-     data.append('sAddress',sAddress)
-     data.append('sPhone',sPhone)
-     data.append('sEmail',sEmail)
-     axios.post(url +'/supplier',data).then((response)=>{
-         const result = response.data
-         if(result.status === 'success')
-         {
-             alert('Successfully added supplier')
-            
-             setMessage("Successfully Added Product");
-                    setMessageId("crud-status-added")
-                    refresh();
-         }else{
-             alert('error while adding supplier')
-         }
-     })
- }
-}
+  const handleAddSupplier = () => {
+    if (!validateForm()) {
+      return
+    }
 
-   return (
-     <div>
-       <>
+    const data = {
+      sName: sName.trim(),
+      sAddress: sAddress.trim(),
+      sPhone: sPhone.trim(),
+      sEmail: sEmail.trim()
+    }
 
-       <div class="modal fade" id="AddSupplier" tabindex="-1" role="dialog" aria-labelledby="AddSupplier" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="AddSupplier">AddSupplier</h5>
-        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <form>
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="inputEmail4">Name</label>
-      <input type="email" class="form-control" id="inputEmail4" placeholder="Name"
-      onChange={(e)=>setSName(e.target.value)} required />
-    </div>
-  
-  </div>
-  <div class="form-group">
-    <label for="inputAddress">Address</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St"
-    onChange={(e)=>setSAddress(e.target.value)} required />
-  </div>
-  <div class="form-group">
-    <label for="number">Phone</label>
-    <input type="text" class="form-control" id="Phone" placeholder=""
-    onChange={(e)=>setSPhone(e.target.value)} required />
-  </div>
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input type="text" class="form-control" id="Email" placeholder=""
-      onChange={(e)=>setSEmail(e.target.value)} required />
-  </div>
-  <div class="form-group">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="gridCheck"/>
-      <label class="form-check-label" for="gridCheck">
-        Check me out
-      </label>
-    </div>
-  </div>
- 
-</form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-bs-dismiss="modal" onClick={addSuppliersToDB}>Add</button>
-       
-      </div>
-    </div>
-  </div>
-</div>
-       
-       </>
+    axios.post(url + '/supplier', data)
+      .then((response) => {
+        const result = response.data
+        if (result.status === 'success') {
+          setMessage('Successfully added supplier')
+          refresh()
+          // Clear form
+          setSName('')
+          setSAddress('')
+          setSPhone('')
+          setSEmail('')
+          setError('')
+          // Close modal
+          document.getElementById("addSupplierModalClose").click()
+        } else {
+          setMessage('Error adding supplier')
+        }
+      })
+      .catch((error) => {
+        console.error('Error adding supplier:', error)
+        setMessage('Error adding supplier')
+      })
+  }
 
-     </div>
-   )
-  
+  return (
+    <div>
+      <div 
+        className="modal fade" 
+        id="AddSupplier" 
+        tabIndex="-1" 
+        role="dialog" 
+        aria-labelledby="AddSupplierLabel" 
+        aria-hidden="true"
+      >
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="AddSupplierLabel">
+                Add New Supplier
+              </h5>
+              <button 
+                type="button" 
+                className="btn-close" 
+                data-bs-dismiss="modal" 
+                aria-label="Close"
+              />
+            </div>
 
+            <div className="modal-body">
+              {error && (
+                <div className="alert alert-danger" role="alert">
+                  {error}
+                </div>
+              )}
 
+              <form>
+                <div className="mb-3">
+                  <label htmlFor="supplierName" className="form-label">
+                    Supplier Name
+                  </label>
+                  <input 
+                    type="text" 
+                    className="form-control" 
+                    id="supplierName" 
+                    placeholder="Enter supplier name"
+                    value={sName}
+                    onChange={(e) => setSName(e.target.value)}
+                    required
+                  />
+                </div>
 
+                <div className="mb-3">
+                  <label htmlFor="supplierAddress" className="form-label">
+                    Address
+                  </label>
+                  <input 
+                    type="text" 
+                    className="form-control" 
+                    id="supplierAddress" 
+                    placeholder="Enter address"
+                    value={sAddress}
+                    onChange={(e) => setSAddress(e.target.value)}
+                    required
+                  />
+                </div>
 
+                <div className="mb-3">
+                  <label htmlFor="supplierPhone" className="form-label">
+                    Phone
+                  </label>
+                  <input 
+                    type="text" 
+                    className="form-control" 
+                    id="supplierPhone" 
+                    placeholder="Enter 10-digit phone number"
+                    value={sPhone}
+                    onChange={(e) => setSPhone(e.target.value)}
+                    required
+                  />
+                </div>
 
+                <div className="mb-3">
+                  <label htmlFor="supplierEmail" className="form-label">
+                    Email
+                  </label>
+                  <input 
+                    type="email" 
+                    className="form-control" 
+                    id="supplierEmail" 
+                    placeholder="Enter email address"
+                    value={sEmail}
+                    onChange={(e) => setSEmail(e.target.value)}
+                    required
+                  />
+                </div>
+              </form>
+            </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /*  <div>
-      <h1 className="page-title">Add Supplier</h1>
-
-      <div className="mb-3">
-        <label htmlFor=""> Name</label>
-        <input
-          onChange={(e) => {
-            setSName(e.target.value)
-          }}
-          type="text"
-          className="form-control"
-        />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="">Address</label>
-        <input
-          onChange={(e) => {
-            setSAddress(e.target.value)
-          }}
-          type="text"
-          className="form-control"
-        />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="">Phone</label>
-        <input
-          onChange={(e) => {
-            setSPhone(e.target.value)
-          }}
-          type="number"
-          className="form-control"
-        />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="">Email</label>
-        <input
-          onChange={(e) => {
-            setSEmail(e.target.value)
-          }}
-          type="email"
-          className="form-control"
-        />
-      </div>
-      <div>
-      <div className="mb-3">
-        <button onClick={addSuppliersToDB} className="btn btn-success">
-          Add
-        </button>
+            <div className="modal-footer">
+              <button 
+                id="addSupplierModalClose"
+                type="button" 
+                className="btn btn-secondary" 
+                data-bs-dismiss="modal"
+                style={{ display: "none" }}
+              />
+              <button 
+                type="button" 
+                className="btn btn-secondary" 
+                data-bs-dismiss="modal"
+              >
+                Cancel
+              </button>
+              <button 
+                type="button" 
+                className="btn btn-success"
+                onClick={handleAddSupplier}
+              >
+                Add Supplier
+              </button>
+            </div>
+          </div>
         </div>
-        <Link to="/suppliers">
-          <a className="btn btn-warning">Back</a>
-        </Link>
       </div>
     </div>
   )
-}*/
-
-
 }
+
 export default AddSuppliers

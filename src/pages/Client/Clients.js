@@ -29,7 +29,11 @@ const [editClient,setEditClient] = useState(0)
 
         const getClients =()=>{
             axios.get(url +'/clients').then((response)=>{
-                const result = response.data 
+                const result = response.data
+                console.log('Admin Clients response:', result)
+                if (result.data && result.data.length > 0) {
+                    console.log('First client:', result.data[0])
+                }
                 if(result.status === 'success'){
                     setClients(result.data)
                 }
@@ -37,16 +41,16 @@ const [editClient,setEditClient] = useState(0)
                     {
                         alert('error while loading')
                     }
-                
+
             })
         }
 
 const displayClients = clients.slice(pagesVisited, pagesVisited + usersPerPage)
-.map((clients) => {
+.map((clients, index) => {
     return(
-        <tr>
+        <tr key={`client-${pagesVisited + index}`}>
             <td>{clients.id}</td>
-            
+
             <td>{clients.clientName}</td>
             
             

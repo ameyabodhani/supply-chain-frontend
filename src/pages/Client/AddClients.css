@@ -1,0 +1,82 @@
+/* AddClients modal styling */
+
+/* Fix autofill white text issue */
+#AddClient input:-webkit-autofill,
+#AddClient input:-webkit-autofill:hover,
+#AddClient input:-webkit-autofill:focus,
+#AddClient input:-webkit-autofill:active {
+    -webkit-text-fill-color: #495057 !important;
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+    transition: background-color 5000s ease-in-out 0s;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+}
+
+/* Ensure all form controls have consistent styling */
+#AddClient .form-control {
+    width: 100% !important;
+    display: block !important;
+    box-sizing: border-box !important;
+    color: #495057 !important;
+    background-color: #fff !important;
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+}
+
+/* Specifically target the name input field - multiple selectors for maximum specificity */
+#AddClient #name,
+#AddClient input#name,
+#AddClient .form-group input#name,
+#AddClient .modal-body input#name {
+    color: #495057 !important;
+    background-color: #fff !important;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+    -webkit-text-fill-color: #495057 !important;
+}
+
+/* Force override autofill specifically on name field */
+#AddClient input#name:-webkit-autofill,
+#AddClient input#name:-webkit-autofill:hover,
+#AddClient input#name:-webkit-autofill:focus,
+#AddClient input#name:-webkit-autofill:active {
+    -webkit-text-fill-color: #495057 !important;
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+    box-shadow: 0 0 0px 1000px white inset !important;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    color: #495057 !important;
+    background-color: white !important;
+}
+
+/* Ensure all labels are consistent */
+#AddClient label {
+    text-align: left !important;
+    display: block !important;
+    margin-bottom: 0.5rem !important;
+    font-weight: 400 !important;
+    color: #212529 !important;
+}
+
+/* Fix modal body alignment */
+#AddClient .modal-body {
+    text-align: left !important;
+}
+
+/* Ensure form groups have consistent spacing */
+#AddClient .form-group {
+    margin-bottom: 1rem !important;
+    width: 100% !important;
+}
+
+/* Fix close button */
+#AddClient .close {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    font-size: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}

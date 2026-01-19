@@ -1,0 +1,19 @@
+/* Target only the modal header close button so Bootstrap rules don't override it.
+     Use a specific selector to avoid affecting other buttons globally. */
+.modal-header .close {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    font-size: 18px;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+/* If Bootstrap's styles are still more specific, the span inside the button can be sized too. */
+.modal-header .close span {
+    font-size: 18px;
+    display: inline-block;
+}

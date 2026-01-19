@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Link, Switch, Route, useHistory } from 'react-router-dom';
+import { HashRouter, Link, Switch, Route, useHistory, Redirect } from 'react-router-dom';
 import { useAuth } from '../../App';
 import { menus } from '../../components/AdminNavMenus';
 
@@ -52,7 +52,7 @@ function AdminContent() {
             <span className="text-white me-3">
               Welcome, <strong>{user.name || 'Admin'}</strong>
             </span>
-            <button 
+            <button
               onClick={handleLogout}
               className="btn btn-outline-light btn-sm"
             >
@@ -64,10 +64,10 @@ function AdminContent() {
 
       <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
         {/* Left Vertical Sidebar Navigation */}
-        <div 
-          className="bg-light border-end" 
-          style={{ 
-            width: '250px', 
+        <div
+          className="bg-light border-end"
+          style={{
+            width: '250px',
             overflowY: 'auto',
             boxShadow: '2px 0 5px rgba(0,0,0,0.1)'
           }}
@@ -78,7 +78,7 @@ function AdminContent() {
                 key={index}
                 to={menu.route}
                 className="list-group-item list-group-item-action d-flex align-items-center py-3"
-                style={{ 
+                style={{
                   borderLeft: '3px solid transparent',
                   transition: 'all 0.2s'
                 }}
@@ -93,15 +93,18 @@ function AdminContent() {
         </div>
 
         {/* Main Content Area */}
-        <div 
-          style={{ 
-            flex: 1, 
+        <div
+          style={{
+            flex: 1,
             overflowY: 'auto',
             backgroundColor: '#f8f9fa',
             padding: '20px'
           }}
         >
           <Switch>
+            <Route exact path="/">
+              <Redirect to="/dashboard" />
+            </Route>
             <Route path="/users" component={Users} />
             <Route path="/add-user" component={AddUser} />
             <Route path="/edit-profile" component={EditProfile} />
@@ -127,9 +130,9 @@ function AdminContent() {
           </Switch>
 
           {/* Footer */}
-          <footer 
-            className="text-center text-muted py-3 mt-4" 
-            style={{ 
+          <footer
+            className="text-center text-muted py-3 mt-4"
+            style={{
               borderTop: '1px solid #dee2e6',
               fontSize: '0.875rem'
             }}
@@ -144,9 +147,9 @@ function AdminContent() {
 
 function AdminLandingPage() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <AdminContent />
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 //import { url } from '../common/constants'
 import '../ProductsDetails.css'
 import { url } from "../../common/constants"
+import AddClient from './AddClient'
 
 
 
@@ -29,6 +30,10 @@ function Client() {
   const getClients = () => {
     axios.get(url + '/clients').then((response) => {
       const result = response.data
+      console.log('Clients response:', result)
+      if (result.data && result.data.length > 0) {
+        console.log('First client:', result.data[0])
+      }
       if (result.status === 'success') {
         setClients(result.data)
       }
@@ -40,34 +45,18 @@ function Client() {
   }
 
   const displayClients = clients.slice(pagesVisited, pagesVisited + usersPerPage)
-    .map((clients) => {
+    .map((client, index) => {
+      console.log('Rendering client:', client)
       return (
-        <tr>
-          <td>{clients.id}</td>
-
-          <td>{clients.clientName}</td>
-
-
-
-          <td>
-            {clients.clientAddress}
-          </td>
-
-          <td>
-            {clients.clientGstno}
-
-
-          </td>
-          <td>
-            {clients.clientPhone}
-          </td>
-
-          <td>{clients.email}</td>
-
-          <td>{clients.pincode}</td>
-          <td>{clients.state}</td>
-
-
+        <tr key={client.id || client.clientId || index}>
+          <td>{client.id || client.clientId || 'N/A'}</td>
+          <td>{client.clientName || 'N/A'}</td>
+          <td>{client.clientAddress || 'N/A'}</td>
+          <td>{client.clientGstno || 'N/A'}</td>
+          <td>{client.clientPhone || 'N/A'}</td>
+          <td>{client.email || client.clientEmail || 'N/A'}</td>
+          <td>{client.pincode || 'N/A'}</td>
+          <td>{client.state || 'N/A'}</td>
         </tr>
       )
     })
@@ -96,6 +85,10 @@ function Client() {
 
   return (
     <div className="page-container">
+      <AddClient
+        refresh={getClients}
+        setMessage={setMessage}
+      />
 
       <div className="page-header">
         <h4>Clients</h4>
@@ -137,6 +130,16 @@ function Client() {
           disabledClassName={"paginationDisabled"}
           activeClassName={"paginationActive"}
         />
+      </div>
+
+      <div className="page-button-div">
+        <button
+          className="btn btn-success"
+          data-bs-toggle="modal"
+          data-bs-target="#AddClient"
+        >
+          Add Client
+        </button>
       </div>
 
     </div>

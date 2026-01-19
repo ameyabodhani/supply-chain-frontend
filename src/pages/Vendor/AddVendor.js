@@ -82,7 +82,7 @@ const AddVendor=({toggle, refresh})=> {
                   <input type="text" className="form-control" id="vendor-name" onChange={(e)=>setName(e.target.value)}/>
               </div>
               
-              <div clclassNameass="mb-1">
+              <div className="mb-1">
                   <label for="vendor-email" className="col-form-label">Email :</label>
                   <input type="email" className="form-control" id="vendor-email" onChange={(e)=>setEmail(e.target.value)}/>
               </div>

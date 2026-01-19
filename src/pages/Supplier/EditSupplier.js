@@ -1,82 +1,174 @@
-import axios from "axios";
-import { url } from '../../common/constants';
-function SupplierEdit({supplier,refresh,setMessage,setMessageId}){
-    var editName = supplier.sName
-    var editAddress = supplier.sAddress;
-    var editPhone = supplier.sPhone;
-    var editEmail = supplier.sEmail;
+import axios from "axios"
+import { useState, useEffect } from "react"
+import { url } from '../../common/constants'
 
-const updatesName = (sName) => {
-    editName = sName
-}
-const updatesAddress=(sAddress)=>{
-    editAddress=sAddress
-}
-const updatesPhone = (sPhone)=>{
-    editPhone=sPhone
-}
-const updatesEmail = (sEmail)=>{
-    editEmail=sEmail
-}
-const editSupplier=()=>{
-    const data = new FormData();
-    data.append("sName",editName)
-    data.append("sAddress",editAddress)
-    data.append("sPhone",editPhone)
-    data.append("sEmail",editEmail)
+function SupplierEdit({ supplier, refresh, setMessage, setMessageId }) {
+  const [editName, setEditName] = useState("")
+  const [editAddress, setEditAddress] = useState("")
+  const [editPhone, setEditPhone] = useState("")
+  const [editEmail, setEditEmail] = useState("")
 
-axios.put(url+"/supplier/"+supplier.id,data).then((response)=>{
-    const result = response.data;
-    if(result.status ==="success"){
-        alert("Edit Successfully")
-        setMessage("Successfully Edit Supplier");
-        setMessageId("crud-status-edited")
-        refresh();
+  // Load supplier data when supplier changes
+  useEffect(() => {
+    if (supplier) {
+      setEditName(supplier.sName || "")
+      setEditAddress(supplier.sAddress || "")
+      setEditPhone(supplier.sPhone || "")
+      setEditEmail(supplier.sEmail || "")
+    }
+  }, [supplier])
+
+  // Don't render if no supplier selected
+  if (!supplier) {
+    return null
+  }
+
+  const handleSave = () => {
+    const data = {
+      sName: editName,
+      sAddress: editAddress,
+      sPhone: editPhone,
+      sEmail: editEmail
     }
 
-})
-}
-return (
-    <>
-      <div className="modal fade" id="EditSupplier" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div className="modal-dialog">
-                <div className="modal-content">
-                <div className="modal-header">
-                    <h5 className="modal-title" id="staticBackdropLabel">Edit Supplier</h5>
-                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div className="modal-body">
-                <form>
-                    <div className="mb-1">
-                        <label for="id" className="col-form-label"  >Supplier Id</label>
-                        <input type="text" className="form-control" id="id" value={supplier.id} readOnly/>
-                    </div>
-                    <div className="mb-1">
-                        <label for="supplier-name" className="col-form-label" > Name:</label>
-                        <input type="text" className="form-control" defaultValue={editName} onChange={(e)=>updatesName(e.target.value)} id="product-name"/>
-                    </div>
-                    <div className="mb-1">
-                        <label for="address" className="col-form-label" >Address</label>
-                        <input type="text" className="form-control" defaultValue={editAddress} onChange={(e)=>updatesAddress(e.target.value)} id="status"/>
-                    </div>
-                    <div className="mb-1">
-                        <label for="number" className="col-form-label" >Phone :</label>
-                        <input type="number" className="form-control" defaultValue={editPhone} onChange={(e)=>updatesPhone(e.target.value)} id="plant-number"/>
-                    </div>
-                    <div className="mb-1">
-                        <label for="email" className="col-form-label" >Email</label>
-                        <input type="email" className="form-control" defaultValue={editEmail} onChange={(e)=>updatesEmail(e.target.value)} id="plant-number"/>
-                    </div>
-                    </form> 
-                </div>
-                <div className="modal-footer">
-                    <button onClick={editSupplier}type="button" className="btn btn-success" data-bs-dismiss="modal">Save</button>
-                </div>
-                </div>
-            </div>
-            </div>
-</>
-)
+    axios.put(url + "/supplier/" + supplier.id, data)
+      .then((response) => {
+        const result = response.data
+        if (result.status === "success") {
+          setMessage("Successfully updated supplier")
+          refresh()
+          // Close modal
+          document.getElementById("editModalClose").click()
+        }
+      })
+      .catch((error) => {
+        console.error("Error updating supplier:", error)
+        setMessage("Error updating supplier")
+      })
+  }
 
+  return (
+    <>
+      <div 
+        className="modal fade" 
+        id="EditSupplier" 
+        data-bs-backdrop="static" 
+        data-bs-keyboard="false" 
+        tabIndex="-1" 
+        aria-labelledby="staticBackdropLabel" 
+        aria-hidden="true"
+      >
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="staticBackdropLabel">
+                Edit Supplier
+              </h5>
+              <button 
+                type="button" 
+                className="btn-close" 
+                data-bs-dismiss="modal" 
+                aria-label="Close"
+              />
+            </div>
+
+            <div className="modal-body">
+              <form>
+                <div className="mb-3">
+                  <label htmlFor="id" className="col-form-label">
+                    Supplier ID
+                  </label>
+                  <input 
+                    type="text" 
+                    className="form-control" 
+                    id="id" 
+                    value={supplier.id}
+                    readOnly
+                  />
+                </div>
+
+                <div className="mb-3">
+                  <label htmlFor="supplier-name" className="col-form-label">
+                    Name
+                  </label>
+                  <input 
+                    type="text" 
+                    className="form-control" 
+                    id="supplier-name"
+                    value={editName} 
+                    onChange={(e) => setEditName(e.target.value)}
+                  />
+                </div>
+
+                <div className="mb-3">
+                  <label htmlFor="address" className="col-form-label">
+                    Address
+                  </label>
+                  <input 
+                    type="text" 
+                    className="form-control" 
+                    id="address"
+                    value={editAddress} 
+                    onChange={(e) => setEditAddress(e.target.value)}
+                  />
+                </div>
+
+                <div className="mb-3">
+                  <label htmlFor="phone" className="col-form-label">
+                    Phone
+                  </label>
+                  <input 
+                    type="text" 
+                    className="form-control" 
+                    id="phone"
+                    value={editPhone} 
+                    onChange={(e) => setEditPhone(e.target.value)}
+                  />
+                </div>
+
+                <div className="mb-3">
+                  <label htmlFor="email" className="col-form-label">
+                    Email
+                  </label>
+                  <input 
+                    type="email" 
+                    className="form-control" 
+                    id="email"
+                    value={editEmail} 
+                    onChange={(e) => setEditEmail(e.target.value)}
+                  />
+                </div>
+              </form>
+            </div>
+
+            <div className="modal-footer">
+              <button 
+                id="editModalClose"
+                type="button" 
+                className="btn btn-secondary" 
+                data-bs-dismiss="modal"
+                style={{ display: "none" }}
+              />
+              <button 
+                onClick={handleSave}
+                type="button" 
+                className="btn btn-success"
+              >
+                Save
+              </button>
+              <button 
+                type="button" 
+                className="btn btn-secondary" 
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  )
 }
+
 export default SupplierEdit

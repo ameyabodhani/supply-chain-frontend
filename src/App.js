@@ -31,7 +31,10 @@ export const useAuth = () => {
 };
 
 function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    const saved = localStorage.getItem('user');
+    return saved ? JSON.parse(saved) : null;
+  });
 
   const login = (userData) => setUser(userData);
   const logout = () => setUser(null);

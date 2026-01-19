@@ -47,6 +47,7 @@
     margin-top: 10px;
     margin-left: 10px;
     transition: 0.5s ease-in-out;
+    width: 10%;
 }
 
 
@@ -126,10 +127,6 @@
   margin-right: 5px;
 }
 
-
-
-
-
 /*********Pagination******/
   .paginationBttns {
     width: 100%px;
@@ -157,8 +154,6 @@
     color: white;
     background-color: #2b2eff;
   }
-
-
   
   .paginationActive a {
     color: white;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route, Link, useHistory } from 'react-router-dom';
+import { HashRouter, Switch, Route, Link, useHistory, Redirect } from 'react-router-dom';
 import { useAuth } from '../../App';
 import { menus } from '../../components/UserNavMenus';
 import './UserLandingPage.css';
@@ -46,7 +46,7 @@ function UserContent() {
             <span className="text-white me-3">
               Welcome, <strong>{user?.name || 'User'}</strong>
             </span>
-            <button 
+            <button
               onClick={handleLogout}
               className="btn btn-outline-light btn-sm"
             >
@@ -58,10 +58,10 @@ function UserContent() {
 
       <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
         {/* Left Vertical Sidebar Navigation */}
-        <div 
-          className="bg-light border-end" 
-          style={{ 
-            width: '250px', 
+        <div
+          className="bg-light border-end"
+          style={{
+            width: '250px',
             overflowY: 'auto',
             boxShadow: '2px 0 5px rgba(0,0,0,0.1)'
           }}
@@ -72,7 +72,7 @@ function UserContent() {
                 key={menu.route}
                 to={menu.route}
                 className="list-group-item list-group-item-action d-flex align-items-center py-3"
-                style={{ 
+                style={{
                   borderLeft: '3px solid transparent',
                   transition: 'all 0.2s'
                 }}
@@ -87,15 +87,18 @@ function UserContent() {
         </div>
 
         {/* Main Content Area */}
-        <div 
-          style={{ 
-            flex: 1, 
+        <div
+          style={{
+            flex: 1,
             overflowY: 'auto',
             backgroundColor: '#f8f9fa',
             padding: '20px'
           }}
         >
           <Switch>
+            <Route exact path="/">
+              <Redirect to="/user-dashboard" />
+            </Route>
             <Route exact path="/suppliers1" component={Suppliers} />
             <Route exact path="/clients1" component={Client} />
             <Route exact path="/vendors1" component={Vendors} />
@@ -116,9 +119,9 @@ function UserContent() {
           </Switch>
 
           {/* Footer */}
-          <footer 
-            className="text-center text-muted py-3 mt-4" 
-            style={{ 
+          <footer
+            className="text-center text-muted py-3 mt-4"
+            style={{
               borderTop: '1px solid #dee2e6',
               fontSize: '0.875rem'
             }}
@@ -133,7 +136,9 @@ function UserContent() {
 
 function UserLandingPage() {
   return (
+    <HashRouter>
       <UserContent />
+    </HashRouter>
   );
 }
 
