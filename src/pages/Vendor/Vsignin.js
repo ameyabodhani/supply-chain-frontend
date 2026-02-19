@@ -52,9 +52,7 @@ function Vsignin() {
       const userData = await response.json();
       console.log('Login successful, user data:', userData);
 
-      // Save user in context and localStorage
       login(userData);
-      localStorage.setItem('user', JSON.stringify(userData));
 
       // Redirect based on role
       const role = userData.role.toLowerCase();

@@ -9,6 +9,9 @@ function Signin() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // New state to show password
+  const [showPassword, setShowPassword] = useState(false);
+
   const { login } = useAuth();
   const history = useHistory();
 
@@ -50,8 +53,6 @@ function Signin() {
       const userData = await response.json();
       console.log("Login successful, received user data:", userData);
 
-      // Save in localStorage
-      localStorage.setItem("user", JSON.stringify(userData));
       login(userData);
 
       // Redirect based on role
@@ -97,13 +98,21 @@ function Signin() {
         <div className="form-group">
           <label>Password:</label>
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             value={password}
             placeholder="Enter password"
             onChange={(e) => setPassword(e.target.value)}
             disabled={loading}
             required
           />
+
+          <label className="show-password-label">Show Password
+            <input
+              className="show-password-label input"
+              type="checkbox"
+              onChange={(e) => setShowPassword(e.target.checked)}
+            />
+          </label>
         </div>
 
         <button type="submit" disabled={loading}>

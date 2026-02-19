@@ -18,6 +18,7 @@ import AdminLandingPage from './pages/Admin/AdminLandingPage';
 import UserLandingPage from './pages/UserLanding/UserLandingPage';
 import Vsignin from './pages/Vendor/Vsignin';
 import VendorLandingPage from './pages/VendorLanding/VendorLandingPage';
+import About from './pages/About';
 
 // ===== 1. AUTH CONTEXT =====
 const AuthContext = createContext();
@@ -36,8 +37,15 @@ function AuthProvider({ children }) {
     return saved ? JSON.parse(saved) : null;
   });
 
-  const login = (userData) => setUser(userData);
-  const logout = () => setUser(null);
+  const login = (userData) => {
+    localStorage.setItem('user', JSON.stringify(userData));
+    setUser(userData);
+  };
+
+  const logout = () => {
+    localStorage.removeItem('user');
+    setUser(null);
+  };
 
   const value = {
     user,
@@ -49,7 +57,25 @@ function AuthProvider({ children }) {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
-// ===== 2. PROTECTED ROUTE =====
+// ===== 2. GUEST ROUTE (redirect away if already logged in) =====
+function GuestRoute({ component: Component, ...rest }) {
+  const { user, isAuthenticated } = useAuth();
+
+  return (
+    <Route
+      {...rest}
+      render={() => {
+        if (!isAuthenticated) return <Component />;
+        const role = user.role.toLowerCase();
+        if (role === 'admin') return <Redirect to="/admin-land" />;
+        if (role === 'vendor') return <Redirect to="/vendor-land" />;
+        return <Redirect to="/user-land" />;
+      }}
+    />
+  );
+}
+
+// ===== 3. PROTECTED ROUTE =====
 function ProtectedRoute({ component: Component, allowedRoles, ...rest }) {
   const { user, isAuthenticated } = useAuth();
 
@@ -77,7 +103,7 @@ function Navigation() {
   const { user, logout, isAuthenticated } = useAuth();
   const history = useHistory();
 
-  const hiddenRoutes = ['/user-land', '/vendor-land', '/admin-land'];
+  const hiddenRoutes = ['/home', '/user-land', '/vendor-land', '/admin-land'];
   const shouldHideNav = hiddenRoutes.includes(location.pathname);
 
   const handleLogout = () => {
@@ -139,10 +165,11 @@ function AppRoutes() {
       <Route exact path="/">
         <Redirect to="/home" />
       </Route>
-      <Route path="/home" component={Home} />
-      <Route path="/signin" component={Signin} />
-      <Route path="/vsignin" component={Vsignin} />
+      <GuestRoute path="/home" component={Home} />
+      <GuestRoute path="/signin" component={Signin} />
+      <GuestRoute path="/vsignin" component={Vsignin} />
       <Route path="/signup" component={Signup} />
+      <GuestRoute path='/about' component={About} />
 
       <ProtectedRoute
         path="/admin-land"
@@ -167,6 +194,7 @@ function AppRoutes() {
 
 // ===== 6. ROOT APP =====
 function App() {
+  console.log("Inside root app");
   return (
     <AuthProvider>
       <BrowserRouter>

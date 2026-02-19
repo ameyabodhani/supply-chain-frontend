@@ -18,6 +18,7 @@ import SuppliedDelivery from '../UpcomingDelivery(User)/SuppliedOrderview';
 import SuppliedDetails from '../UpcomingDelivery(User)/SuppliedDetails';
 import UpcomingProduction from '../UpComingProduction(User)/UpcomingProduction';
 import Revenue from '../Revenue(User)/Revenue';
+import ViewParts from '../Part/ViewParts';
 import Complaints from '../User/Complaints/SupplierComplaints';
 import SupplierComplaintsEdit from '../User/Complaints/EditSupplierComplaints';
 import ComplaintDetails from '../User/Complaints/ComplaintsSupplierDetails';
@@ -37,22 +38,66 @@ function UserContent() {
   return (
     <div style={{ display: 'flex', height: '100vh', flexDirection: 'column' }}>
       {/* Top Horizontal Navigation Bar */}
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark" style={{ zIndex: 1000 }}>
-        <div className="container-fluid">
-          <span className="navbar-brand mb-0 h1">
-            Supply Chain Management - User Panel
+      <nav style={{
+        backgroundColor: '#1e293b',
+        padding: '0 20px',
+        height: '56px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        zIndex: 1000,
+        boxShadow: '0 2px 8px rgba(0,0,0,0.35)',
+        flexShrink: 0
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <i className="fa-solid fa-truck-fast" style={{ color: '#34d399', fontSize: '1.3rem' }}></i>
+          <span style={{ color: 'white', fontWeight: '700', fontSize: '1rem', letterSpacing: '0.3px' }}>
+            Supply Chain Management
           </span>
-          <div className="d-flex align-items-center">
-            <span className="text-white me-3">
-              Welcome, <strong>{user?.name || 'User'}</strong>
+          <span style={{
+            backgroundColor: '#10b981',
+            color: 'white',
+            fontSize: '10px',
+            fontWeight: '700',
+            padding: '2px 8px',
+            borderRadius: '4px',
+            letterSpacing: '0.8px'
+          }}>USER</span>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div style={{
+              width: '32px', height: '32px',
+              borderRadius: '50%',
+              backgroundColor: '#10b981',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              color: 'white', fontWeight: '700', fontSize: '14px',
+              flexShrink: 0
+            }}>
+              {(user?.name || 'U').charAt(0).toUpperCase()}
+            </div>
+            <span style={{ color: '#cbd5e1', fontSize: '14px' }}>
+              {user?.name || 'User'}
             </span>
-            <button
-              onClick={handleLogout}
-              className="btn btn-outline-light btn-sm"
-            >
-              Logout
-            </button>
           </div>
+          <button
+            onClick={handleLogout}
+            style={{
+              backgroundColor: 'transparent',
+              border: '1px solid #475569',
+              color: '#cbd5e1',
+              padding: '5px 12px',
+              borderRadius: '6px',
+              fontSize: '13px',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px'
+            }}
+          >
+            <i className="fa-solid fa-right-from-bracket"></i>
+            Logout
+          </button>
         </div>
       </nav>
 
@@ -90,40 +135,45 @@ function UserContent() {
         <div
           style={{
             flex: 1,
-            overflowY: 'auto',
+            overflow: 'hidden',
             backgroundColor: '#f8f9fa',
-            padding: '20px'
+            display: 'flex',
+            flexDirection: 'column'
           }}
         >
-          <Switch>
-            <Route exact path="/">
-              <Redirect to="/user-dashboard" />
-            </Route>
-            <Route exact path="/suppliers1" component={Suppliers} />
-            <Route exact path="/clients1" component={Client} />
-            <Route exact path="/vendors1" component={Vendors} />
-            <Route exact path="/vehicles" component={Vehicles} />
-            <Route exact path="/dashboard" component={Dashboard} />
-            <Route exact path="/scomplaints" component={Complaints} />
-            <Route exact path="/complaints" component={SupplierComplaintsEdit} />
-            <Route exact path="/complaint-details" component={ComplaintDetails} />
-            <Route exact path="/plant" component={User_PlantLandingPage} />
-            <Route exact path="/products" component={User_ProductsDetails} />
-            <Route exact path="/upcoming-deliveries" component={User_UpComingDeliveryLandingPage} />
-            <Route exact path="/supplied-details" component={SuppliedDetails} />
-            <Route exact path="/upcoming-production" component={UpcomingProduction} />
-            <Route exact path="/user-dashboard" component={User_Dashboard} />
-            <Route exact path="/suppliedOrder" component={SuppliedDelivery} />
-            <Route exact path="/revenue" component={Revenue} />
-            <Route render={() => <div style={{ padding: '20px', textAlign: 'center', color: '#999' }}>Page not found</div>} />
-          </Switch>
+          <div style={{ flex: 1, overflow: 'hidden' }}>
+            <Switch>
+              <Route exact path="/">
+                <Redirect to="/user-dashboard" />
+              </Route>
+              <Route exact path="/suppliers1" component={Suppliers} />
+              <Route exact path="/clients1" component={Client} />
+              <Route exact path="/vendors1" component={Vendors} />
+              <Route exact path="/vehicles" component={Vehicles} />
+              <Route exact path="/dashboard" component={Dashboard} />
+              <Route exact path="/scomplaints" component={Complaints} />
+              <Route exact path="/complaints" component={SupplierComplaintsEdit} />
+              <Route exact path="/complaint-details" component={ComplaintDetails} />
+              <Route exact path="/plant" component={User_PlantLandingPage} />
+              <Route exact path="/products" component={User_ProductsDetails} />
+              <Route exact path="/upcoming-deliveries" component={User_UpComingDeliveryLandingPage} />
+              <Route exact path="/supplied-details" component={SuppliedDetails} />
+              <Route exact path="/upcoming-production" component={UpcomingProduction} />
+              <Route exact path="/user-dashboard" component={User_Dashboard} />
+              <Route exact path="/suppliedOrder" component={SuppliedDelivery} />
+              <Route exact path="/revenue" component={Revenue} />
+              <Route exact path="/view-parts" component={ViewParts} />
+              <Route render={() => <div style={{ padding: '20px', textAlign: 'center', color: '#999' }}>Page not found</div>} />
+            </Switch>
+          </div>
 
           {/* Footer */}
           <footer
-            className="text-center text-muted py-3 mt-4"
+            className="text-center text-muted py-2"
             style={{
               borderTop: '1px solid #dee2e6',
-              fontSize: '0.875rem'
+              fontSize: '0.8rem',
+              flexShrink: 0
             }}
           >
             © 2021 Supply Chain Management, Inc. All rights reserved

@@ -1,108 +1,99 @@
 import ReactPaginate from 'react-paginate'
-import { useState,useEffect } from 'react'
+import { useState } from 'react'
 import { url } from '../../common/constants';
-import axios from 'axios';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import RemoveShoppingCartIcon from '@material-ui/icons/RemoveShoppingCart';
 import { Link } from 'react-router-dom';
+import useFetch from '../../hooks/useFetch';
 
-const Parts=()=>{
-    const [parts, setParts] = useState([]);
-    const[isAdded, setIsAdded] = useState(false)
-    const [pageNumber, setPageNumber] = useState(0)
-    const usersPerPage=7;
+const Parts = () => {
+  const [pageNumber, setPageNumber] = useState(0)
+  const [searchTerm, setSearchTerm] = useState('')
+  const usersPerPage = 7;
+  const pagesVisited = pageNumber * usersPerPage;
 
-    const pagesVisited = pageNumber * usersPerPage;
-    
-    useEffect(()=>{
-      getAllParts();
-  },[])
-  
-  const getAllParts =()=>{
-    axios.get(url+"/parts").then((response)=>{
-  const result = response.data;
-  if(result.status ==="success"){
-      setParts(result.data) 
-  }
-  else{
-    alert("Some error occured parts cannot be fetched !")
-  }
-    })
-  }
-    const PartRow = parts
+  const { data: partsResponse, loading, error } = useFetch(url + '/parts')
+  const parts = partsResponse?.data || []
+
+  const filteredParts = parts.filter((part) =>
+    part.partName.toLowerCase().includes(searchTerm.toLowerCase())
+  )
+
+  const PartRow = filteredParts
     .slice(pagesVisited, pagesVisited + usersPerPage)
     .map((part) => {
       return (
         <tr>
-        <td >{part.partId}</td>
-        <td>{part.partName}</td>
-        <td>{part.partPrice}</td>
-        <td>{part.availableStock}</td>
-        
+          <td>{part.partId}</td>
+          <td>{part.partName}</td>
+          <td>{part.partPrice}</td>
+          <td>{part.availableStock}</td>
         </tr>
       );
     });
-    const pageCount = Math.ceil(parts.length / usersPerPage);
-      const changePage = ({ selected }) => {
-        setPageNumber(selected);
-      };
 
+  const pageCount = Math.ceil(filteredParts.length / usersPerPage);
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
 
-
-
-    return (
-        <div className="page-container">
-          <div className="page-header">
-            <h4>All Parts</h4>
-          </div>
-          <div className="page-updateStatus">
-            {
-              isAdded && (<p>Successfully Added Vendor</p>)
-            }
-          </div>
-          <div className="page-table-div">
-          <table id="page-table" class="table table-striped table-sm" cellspacing="0" width="100%">
-            <thead>
-              <tr>
-                <th class="th-sm id">Id
-                </th>
-                <th class="th-sm">Name
-                </th>
-                <th class="th-sm">Price
-                </th>
-                <th class="th-sm">AvailableStocks
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-            {PartRow}
-            </tbody>
-        </table>
-        <ReactPaginate
-        previousLabel={"Previous"}
-        nextLabel={"Next"}
-        pageCount={pageCount}
-        onPageChange={changePage}
-        containerClassName={"paginationBttns"}
-        previousLinkClassName={"previousBttn"}
-        nextLinkClassName={"nextBttn"}
-        disabledClassName={"paginationDisabled"}
-        activeClassName={"paginationActive"}
-      />
-          </div>
-          <Link to="/vendors">
-          <div className="page-button-div">
-            <button className="btn btn-danger">Back</button>
-          </div>
-          </Link>
-          <Link to="/orders">
-          <div className="page-button-div">
-            <button className="btn btn-success">View Order</button>
-          </div>
-          </Link>
+  return (
+    <div className="page-container">
+      <div className="page-header">
+        <h4>All Parts</h4>
+        <input type="text"
+          placeholder="Search by part name"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)
+          }
+        />
+      </div>
+      <div className="page-table-div">
+        {error ? (
+          <p style={{ color: 'red' }}>Error: {error}</p>
+        ) : loading ? (
+          <p>Parts are loading...</p>
+        ) : parts.length === 0 ? (
+          <p>No Parts Found</p>
+        ) : (
+          <>
+            <table id="page-table" className="table table-striped table-sm" cellSpacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th className="th-sm id">Id</th>
+                  <th className="th-sm">Name</th>
+                  <th className="th-sm">Price</th>
+                  <th className="th-sm">AvailableStocks</th>
+                </tr>
+              </thead>
+              <tbody>
+                {PartRow}
+              </tbody>
+            </table>
+            <ReactPaginate
+              previousLabel={"Previous"}
+              nextLabel={"Next"}
+              pageCount={pageCount}
+              onPageChange={changePage}
+              containerClassName={"paginationBttns"}
+              previousLinkClassName={"previousBttn"}
+              nextLinkClassName={"nextBttn"}
+              disabledClassName={"paginationDisabled"}
+              activeClassName={"paginationActive"}
+            />
+          </>
+        )}
+      </div>
+      <Link to="/vendors">
+        <div className="page-button-div">
+          <button className="btn btn-danger">Back</button>
         </div>
-        
-    )
+      </Link>
+      <Link to="/orders">
+        <div className="page-button-div">
+          <button className="btn btn-success">View Order</button>
+        </div>
+      </Link>
+    </div>
+  )
 }
 
 export default Parts

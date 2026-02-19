@@ -1,0 +1,183 @@
+/* About.css */
+
+.about-wrapper {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  color: #202124;
+  background: #f8f9fa;
+  min-height: 100vh;
+}
+
+/* ── Hero ── */
+.about-hero {
+  background: linear-gradient(145deg, #1a73e8 0%, #0d47a1 100%);
+  color: white;
+  padding: 64px 24px;
+  text-align: center;
+}
+
+.about-hero-inner {
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.about-logo {
+  width: 56px;
+  height: 56px;
+  background: rgba(255,255,255,0.18);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.about-hero h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.about-tagline {
+  font-size: 16px;
+  opacity: 0.85;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.about-auth-badge {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 20px;
+  padding: 6px 16px;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.about-auth-badge.muted {
+  opacity: 0.65;
+}
+
+/* ── Sections ── */
+.about-section {
+  padding: 56px 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.about-section-alt {
+  background: #fff;
+  max-width: 100%;
+  padding: 48px 24px;
+}
+
+.about-section-alt > * {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.about-section-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #202124;
+  margin: 0 0 32px 0;
+  text-align: center;
+}
+
+/* ── Module cards ── */
+.about-modules {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.about-module-card {
+  background: #fff;
+  border: 1px solid #e8eaed;
+  border-radius: 12px;
+  padding: 24px;
+  transition: box-shadow 0.2s ease;
+}
+
+.about-module-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.about-module-icon {
+  font-size: 26px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.about-module-card h4 {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: #202124;
+}
+
+.about-module-card p {
+  font-size: 13px;
+  color: #5f6368;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Tech stack badges ── */
+.about-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.about-stack-badge {
+  background: #e8f0fe;
+  color: #1a73e8;
+  border: 1px solid #c5d8fd;
+  border-radius: 20px;
+  padding: 6px 18px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* ── CTA ── */
+.about-cta {
+  text-align: center;
+  padding: 48px 24px;
+}
+
+.about-back-btn {
+  background: #1a73e8;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 28px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.about-back-btn:hover {
+  background: #1557b0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .about-modules {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-modules {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-function DashboardContents({registeredUsers,registeredVendors,plantsCount,productsCount,clientsCount,clientOrdersCounts,suppliersCount,clientOrders,carsProduced}) {
+function DashboardContents({registeredUsers,registeredVendors,plantsCount,productsCount,clientsCount,clientOrdersCounts,suppliersCount,carsProduced,partsCount,vendorOrdersCount,suppliedOrdersCount,complaintsCount,vehiclesCount,upcomingProductionCount}) {
 
 const [userclass, setUserClass] = useState("")
 const [supplierclass, setSupplierClass] = useState("")
@@ -77,8 +77,43 @@ const [productionclass, setProductionClass] = useState("")
                 heading:"New Orders",
                 className:ordersclass
             },
-           
-        ]   
+            {
+                id:"parts",
+                counts:partsCount,
+                heading:"Total Parts",
+                className:supplierclass
+            },
+            {
+                id:"vendororders",
+                counts:vendorOrdersCount,
+                heading:"Vendor Orders",
+                className:vendorsclass
+            },
+            {
+                id:"suppliedorders",
+                counts:suppliedOrdersCount,
+                heading:"Supplied Orders",
+                className:clientclass
+            },
+            {
+                id:"complaints",
+                counts:complaintsCount,
+                heading:"Complaints",
+                className:ordersclass
+            },
+            {
+                id:"vehicles",
+                counts:vehiclesCount,
+                heading:"Vehicles",
+                className:plantsclass
+            },
+            {
+                id:"upcomingproduction",
+                counts:upcomingProductionCount,
+                heading:"Upcoming Production",
+                className:productionclass
+            },
+        ]
 
    
     return (

@@ -1,10 +1,11 @@
 import { useHistory } from 'react-router-dom'
 
-const UserRow = ({ user }) => {
+const UserRow = ({ user, serialNo }) => {
 
   const history=useHistory()
   return (
     <tr>
+      <td>{serialNo}</td>
       <td>{user.id}</td>
       <td>{user.name}</td>
       <td>{user.email}</td>

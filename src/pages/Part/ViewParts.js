@@ -22,9 +22,11 @@ const ViewParts=()=>{
 
     const history = useHistory()
 
-    const vendor = location.state.vendor
+    const vendor = location.state?.vendor
     useEffect(()=>{
-      getAllVendorParts();
+      if (vendor) {
+        getAllVendorParts();
+      }
   },[])
   
   const getAllVendorParts =()=>{
@@ -69,6 +71,20 @@ const ViewParts=()=>{
       const toggle =() =>{
         setIsAdded(true);
       }
+    if (!vendor) {
+      return (
+        <div className="page-container">
+          <div className="page-header"><h4>Parts</h4></div>
+          <p style={{ margin: '20px', color: 'red' }}>
+            No vendor selected. Please go back and select a vendor first.
+          </p>
+          <div className="page-button-div">
+            <button className="btn btn-danger" onClick={() => history.goBack()}>Back to Vendors</button>
+          </div>
+        </div>
+      )
+    }
+
     return (
         <div className="page-container">
           <AddPart vendor={vendor} toggle={toggle} refresh={getAllVendorParts}/>
@@ -115,11 +131,9 @@ const ViewParts=()=>{
         <div className="page-button-div">
             <button onClick={()=>(vendor)} className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddPart-staticBackdrop">Add Part</button>
           </div>
-        <Link to="/vendors">
         <div className="page-button-div">
-          <button className="btn btn-danger">Back</button>
+          <button className="btn btn-danger" onClick={() => history.goBack()}>Back</button>
         </div>
-        </Link>
       </div>
       
     )

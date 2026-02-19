@@ -43,22 +43,66 @@ function AdminContent() {
   return (
     <div style={{ display: 'flex', height: '100vh', flexDirection: 'column' }}>
       {/* Top Horizontal Navigation Bar */}
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark" style={{ zIndex: 1000 }}>
-        <div className="container-fluid">
-          <span className="navbar-brand mb-0 h1">
-            Supply Chain Management - Admin Panel
+      <nav style={{
+        backgroundColor: '#1e293b',
+        padding: '0 20px',
+        height: '56px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        zIndex: 1000,
+        boxShadow: '0 2px 8px rgba(0,0,0,0.35)',
+        flexShrink: 0
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <i className="fa-solid fa-truck-fast" style={{ color: '#60a5fa', fontSize: '1.3rem' }}></i>
+          <span style={{ color: 'white', fontWeight: '700', fontSize: '1rem', letterSpacing: '0.3px' }}>
+            Supply Chain Management
           </span>
-          <div className="d-flex align-items-center">
-            <span className="text-white me-3">
-              Welcome, <strong>{user.name || 'Admin'}</strong>
+          <span style={{
+            backgroundColor: '#3b82f6',
+            color: 'white',
+            fontSize: '10px',
+            fontWeight: '700',
+            padding: '2px 8px',
+            borderRadius: '4px',
+            letterSpacing: '0.8px'
+          }}>ADMIN</span>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div style={{
+              width: '32px', height: '32px',
+              borderRadius: '50%',
+              backgroundColor: '#3b82f6',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              color: 'white', fontWeight: '700', fontSize: '14px',
+              flexShrink: 0
+            }}>
+              {(user.name || 'A').charAt(0).toUpperCase()}
+            </div>
+            <span style={{ color: '#cbd5e1', fontSize: '14px' }}>
+              {user.name || 'Admin'}
             </span>
-            <button
-              onClick={handleLogout}
-              className="btn btn-outline-light btn-sm"
-            >
-              Logout
-            </button>
           </div>
+          <button
+            onClick={handleLogout}
+            style={{
+              backgroundColor: 'transparent',
+              border: '1px solid #475569',
+              color: '#cbd5e1',
+              padding: '5px 12px',
+              borderRadius: '6px',
+              fontSize: '13px',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px'
+            }}
+          >
+            <i className="fa-solid fa-right-from-bracket"></i>
+            Logout
+          </button>
         </div>
       </nav>
 
@@ -96,45 +140,49 @@ function AdminContent() {
         <div
           style={{
             flex: 1,
-            overflowY: 'auto',
+            overflow: 'hidden',
             backgroundColor: '#f8f9fa',
-            padding: '20px'
+            display: 'flex',
+            flexDirection: 'column'
           }}
         >
-          <Switch>
-            <Route exact path="/">
-              <Redirect to="/dashboard" />
-            </Route>
-            <Route path="/users" component={Users} />
-            <Route path="/add-user" component={AddUser} />
-            <Route path="/edit-profile" component={EditProfile} />
-            <Route path="/vendors" component={Vendors} />
-            <Route path="/edit-vprofile" component={EditVProfile} />
-            <Route path="/add-vendor" component={AddVendor} />
-            <Route path="/delete-profile" component={DeleteUser} />
-            <Route path="/parts" component={Parts} />
-            <Route path="/viewParts" component={ViewParts} />
-            <Route path="/orders" component={Orders} />
-            <Route path="/viewOrder" component={ViewOrder} />
-            <Route path="/saveOrder" component={SaveOrder} />
-            <Route path="/cart" component={Cart} />
-            <Route path="/plant" component={PlantLandingPage} />
-            <Route path="/products" component={ProductsDetails} />
-            <Route path="/production" component={ProductionLandingPage} />
-            <Route path="/productionhistory" component={ProductionHistory} />
-            <Route path="/client-orders" component={UpComingDeliveryLandingPage} />
-            <Route path="/dashboard" component={Dashboard} />
-            <Route path="/suppliers" component={Suppliers} />
-            <Route path="/clients" component={Client} />
-            <Route path="/complaints" component={SupplierComplaintsEdit} />
-          </Switch>
+          <div style={{ flex: 1, overflow: 'hidden' }}>
+            <Switch>
+              <Route exact path="/">
+                <Redirect to="/dashboard" />
+              </Route>
+              <Route path="/users" component={Users} />
+              <Route path="/add-user" component={AddUser} />
+              <Route path="/edit-profile" component={EditProfile} />
+              <Route path="/vendors" component={Vendors} />
+              <Route path="/edit-vprofile" component={EditVProfile} />
+              <Route path="/add-vendor" component={AddVendor} />
+              <Route path="/delete-profile" component={DeleteUser} />
+              <Route path="/parts" component={Parts} />
+              <Route path="/viewParts" component={ViewParts} />
+              <Route path="/orders" component={Orders} />
+              <Route path="/viewOrder" component={ViewOrder} />
+              <Route path="/saveOrder" component={SaveOrder} />
+              <Route path="/cart" component={Cart} />
+              <Route path="/plant" component={PlantLandingPage} />
+              <Route path="/products" component={ProductsDetails} />
+              <Route path="/production" component={ProductionLandingPage} />
+              <Route path="/productionhistory" component={ProductionHistory} />
+              <Route path="/client-orders" component={UpComingDeliveryLandingPage} />
+              <Route path="/dashboard" component={Dashboard} />
+              <Route path="/suppliers" component={Suppliers} />
+              <Route path="/clients" component={Client} />
+              <Route path="/complaints" component={SupplierComplaintsEdit} />
+            </Switch>
+          </div>
 
           {/* Footer */}
           <footer
-            className="text-center text-muted py-3 mt-4"
+            className="text-center text-muted py-2"
             style={{
               borderTop: '1px solid #dee2e6',
-              fontSize: '0.875rem'
+              fontSize: '0.8rem',
+              flexShrink: 0
             }}
           >
             © 2021 Supply Chain Management, Inc. All rights reserved

@@ -1,222 +1,314 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
-*{
-    font-family: 'Roboto', sans-serif;
-}
-.page-container{
-
-    min-height: 527px;
-    /* background-color: antiquewhite; */
-    /* border: 1px solid black; */
-    /*box-shadow: 0px 0px 20px gray;*/
-    display: flex;
-    flex-direction: column;
-}
-.page-header{
-    height: 50px;
-     background-color: violet; 
-    
+* {
+  font-family: 'Inter', sans-serif;
+  box-sizing: border-box;
 }
 
-.page-header h4{
-    margin-left: 10px;
-    font-size: 18px;
-    
-    line-height: 50px;
+/* ── Page shell ── */
+.page-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f9fa;
+  overflow: hidden;
 }
 
-.page-updateStatus{
-    margin-top: 10px;
-    margin-left: 10px;
-    height: 35px;
-    /* border: 1px solid black; */
-}
-#page-table .id{
-  
-  width: 140px;
-}
-
-.page-table-div{
-    min-height: 360px;
-    /* border: 1px solid black; */
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 10px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.page-button-div{
-    margin-top: 10px;
-    margin-left: 10px;
-    transition: 0.5s ease-in-out;
-}
-
-
-.btn-page-edit{
-    margin-right: 5px;
-    height: 30px;
-    padding-top: 2px;
-}
-.btn-page-delete{
-    height: 30px;
-    padding-top: 2px;
-}
-
-#page-table thead{
-    background-color:#E5E8E8;
-    height: 30px;
-    line-height: 30px;
-}
-
-
-.productionHistory-btn{
-    margin-left: 20px;
-    color: white;
-}
-
-
-#page-table tbody .status .Active{
-  background-color: #00e600;
-  width: 50px;
-  text-align: center;
+/* ── Header bar ── */
+.page-header {
+  height: 52px;
+  background-color: #1e293b;
   color: white;
-  border-radius: 5px;
-  margin: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  border-radius: 6px 6px 0 0;
+}
+
+.page-header h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  color: white;
+  letter-spacing: 0.3px;
+}
+
+.page-header input {
+  height: 32px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 6px;
   font-size: 13px;
-  margin-top: 3px;    
-}
-#page-table tbody .status .done{
-  background-color: #00e600;
-  width: 50px;
-  text-align: center;
+  width: 230px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.12);
   color: white;
-  border-radius: 5px;
-  margin: 0px;
-  font-size: 13px;
-  margin-top: 3px;    
 }
 
-
-#page-table tbody .status .Inactive{
-  background-color: #ff9900;
-  width: 50px;
-  text-align: center;
-  color: white;
-  border-radius: 5px;
-  margin: 0px;
-  font-size: 13px;
- margin-top: 3px; 
-}
-#page-table tbody .status .InActive{
-  background-color: #ff9900;
-  width: 50px;
-  text-align: center;
-  color: white;
-  border-radius: 5px;
-  margin: 0px;
-  font-size: 13px;
- margin-top: 3px; 
-}
-#page-table tbody .status .pending{
-  background-color: #ff9900;
-  width: 55px;
-  text-align: center;
-  color: white;
-  border-radius: 5px;
-  margin: 0px;
-  font-size: 13px;
- margin-top: 3px; 
+.page-header input::placeholder {
+  color: rgba(255, 255, 255, 0.55);
 }
 
-.page-updateStatus #crud-status-added{
-  
-  padding: 3px 0px 3px 5px;
-  background-color: #00e600;
-  color: white;
-  text-align: center;
-  border-radius: 8px;
-  margin-right: 5px;
+.page-header input:focus {
+  background: rgba(255, 255, 255, 0.2);
 }
-.page-updateStatus #crud-status-edited{
-  padding: 3px 0px 3px 5px;
-  background-color: orange;
-  color: white;
-  text-align: center;
-  border-radius: 8px;
-  margin-right: 5px;
-  transition-delay: 1s;
+
+/* ── Status message bar ── */
+.page-updateStatus {
+  min-height: 32px;
+  padding: 4px 16px;
+  font-size: 13px;
 }
-.page-updateStatus #crud-status-hide{
+
+/* ── Table area ── */
+.page-table-div {
+  flex: 1;
+  padding: 12px 16px;
+}
+
+#page-table {
+  font-size: 14px;
+  border-collapse: collapse;
+  width: 100%;
+  background: white;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+#page-table thead {
+  background-color: #e2e8f0;
+  height: 40px;
+}
+
+#page-table thead th {
+  font-weight: 700;
+  font-size: 13px;
+  color: #0f172a;
+  border-bottom: 2px solid #cbd5e1;
+  padding: 0 12px;
+  white-space: nowrap;
+}
+
+#page-table tbody tr {
+  border-bottom: 1px solid #e2e8f0;
+  transition: background 0.15s;
+}
+
+#page-table tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+#page-table tbody td {
+  padding: 10px 12px;
+  vertical-align: middle;
+  color: #0f172a;
+  font-size: 14px;
+}
+
+#page-table .id {
+  width: 60px;
+}
+
+/* ── Status badges ── */
+.status {
+  vertical-align: middle;
+}
+
+#page-table tbody .status .active,
+#page-table tbody .status .Active {
+  display: inline-block;
+  background-color: #22c55e;
+  color: white;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
+  margin: 0;
+}
+
+#page-table tbody .status .Inactive,
+#page-table tbody .status .InActive {
+  display: inline-block;
+  background-color: #f97316;
+  color: white;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
+  margin: 0;
+}
+
+#page-table tbody .status .done {
+  display: inline-block;
+  background-color: #22c55e;
+  color: white;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
+  margin: 0;
+}
+
+#page-table tbody .status .pending {
+  display: inline-block;
+  background-color: #f97316;
+  color: white;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* ── Action buttons ── */
+.btn-page-edit {
+  margin-right: 4px;
+  height: 28px;
+  width: 28px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+.btn-page-delete {
+  height: 28px;
+  width: 28px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+.btn-page-add {
+  height: 28px;
+  width: 28px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+/* ── Bottom buttons ── */
+.page-button-div {
+  padding: 8px 16px 4px;
+  display: inline-block;
+}
+
+/* ── CRUD status messages ── */
+.page-updateStatus #crud-status-added {
+  display: inline-block;
+  padding: 3px 10px;
+  background-color: #22c55e;
+  color: white;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.page-updateStatus #crud-status-edited {
+  display: inline-block;
+  padding: 3px 10px;
+  background-color: #f97316;
+  color: white;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.page-updateStatus #crud-status-deleted {
+  display: inline-block;
+  padding: 3px 10px;
+  background-color: #ef4444;
+  color: white;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.page-updateStatus #crud-status-hide {
   opacity: 0;
 }
-.page-updateStatus #crud-status-deleted{
-  padding: 3px 0px 3px 5px;
-  background-color: red;
+
+/* ── Yes/No badges ── */
+.Yes {
+  display: inline-block;
+  padding: 2px 10px;
+  background-color: #22c55e;
   color: white;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
   text-align: center;
-  border-radius: 8px;
-  margin-right: 5px;
 }
 
-.Yes{
-  padding: 1px 0px 0px 0px;
-  width: 50px;
-  background-color: #00e600;
+.No {
+  display: inline-block;
+  padding: 2px 10px;
+  background-color: #ef4444;
   color: white;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
   text-align: center;
-  border-radius: 8px;
-  margin-right: 5px;
-  
-}
-.No{
-  padding: 1px 0px 0px 0px;
-
-  width: 50px;
-  background-color: red;
-  color: white;
-  text-align: center;
-  border-radius: 8px;
-  margin-right: 5px;
 }
 
-/*********Pagination******/
-  .paginationBttns {
-    width: 100%px;
-    height: 20px;
-    list-style: none;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    margin-top: 30px;
-   
-  }
-  
-  .paginationBttns a {
-    padding: 10px;
-    margin: 8px;
-    border-radius: 5px;
-   /* border: 1px solid #2b2eff;*/
-    color: black;
-    cursor: pointer;
-    text-decoration: none;
-    background-color: gainsboro;
-  }
-  
-  .paginationBttns a:hover {
-    color: white;
-    background-color: #2b2eff;
-  }
+/* ── Pagination ── */
+.paginationBttns {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 16px 0;
+  margin: 0;
+}
 
+.paginationBttns a {
+  padding: 6px 12px;
+  border-radius: 6px;
+  color: #475569;
+  cursor: pointer;
+  text-decoration: none;
+  background-color: white;
+  border: 1px solid #e2e8f0;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.15s;
+}
 
-  
-  .paginationActive a {
-    color: white;
-    background-color: #2b2eff;
-  }
-  /*
-  .paginationDisabled a {
-    color: grey;
-    background-color: grey;
-  }*/
+.paginationBttns a:hover {
+  color: white;
+  background-color: #1e293b;
+  border-color: #1e293b;
+}
+
+.paginationActive a {
+  color: white;
+  background-color: #1e293b;
+  border-color: #1e293b;
+}
+
+.paginationDisabled a {
+  color: #cbd5e1;
+  cursor: not-allowed;
+  background-color: #f8fafc;
+}
+
+.paginationDisabled a:hover {
+  color: #cbd5e1;
+  background-color: #f8fafc;
+  border-color: #e2e8f0;
+}
+
+/* ── Misc ── */
+.productionHistory-btn {
+  margin-left: 20px;
+  color: white;
+}
